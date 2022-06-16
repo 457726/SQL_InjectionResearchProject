@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewData["Title"] = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<body>
+    <div>
+    <h2>PostApiTest</h2>
+    <b>Productnaam</b><br />
+    <input type="text" id="txtName" /><br />
+    <b>Product beschrijving</b><br />
+    <input type="text" id="txtDescription" /><br />
+    <b>Product merk</b><br />
+    <input type="text" id="txtBrand" /><br />
+    <b>Product prijs</b><br />
+    <input type="text" id="txtPrice" /><br />
+    <input type="button" value="Save" id="verstuur" />
+</div>
+@section Scripts{
+<script src="~/lib/jquery/jquery.js"></script>
+<script type="text/javascript">
+        function AddProduct(){
+        jQuery.support.cors = true;
+        var product = {
+            ProductName: $('#txtName').val(),
+            Description: $('#txtDescription').val(),
+            Brand: $('#txtBrand').val(),
+            Price: $('#txtPrice').val()
+        };
+
+        $ajax.({
+            url: 'https://localhost:44397/DataAcces/AddData',
+            type: 'POST',
+            data: JSON.stringify(product),
+            contentType: "application/json;charset=utf-8",
+            succes: function (data){
+
+            },
+            error: function(x,y,z){
+
+            }
+        });
+        console.log(product);
+    }
+    $("#verstuur").click(AddProduct());
+</script>
+}
+</body>
